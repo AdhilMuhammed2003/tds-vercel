@@ -4,8 +4,11 @@ import json
 import os
 
 app = Flask(__name__)
-CORS(app)
 
+# Enable CORS for the specified origin
+CORS(app, resources={r"/api/*": {"origins": "*"}})  # Use "*" for testing, restrict to specific origins in production.
+
+# Load data from the JSON file
 def load_data():
     json_file_path = os.path.join(os.path.dirname(__file__), '../public/q-vercel-python.json')
     with open(json_file_path, "r") as f:
@@ -13,13 +16,19 @@ def load_data():
 
 @app.route('/api', methods=['GET'])
 def get_marks():
+    # Load data from JSON
     data = load_data()
+
+    # Extract 'name' parameters from the request
     names = request.args.getlist('name')
+
+    # Find marks for the requested names
     marks = [item['marks'] for item in data if item['name'] in names]
 
+    # Return the response with CORS headers
     response = make_response(jsonify({"marks": marks}))
-    response.headers["Access-Control-Allow-Origin"] = "https://exam.sanand.workers.dev"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
+    response.headers["Access-Control-Allow-Origin"] = "*"  # Change "*" to your domain for production
+    response.headers["Access-Control-Allow-Methods"] = "GET, OPTIONS"
     response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
     return response
 

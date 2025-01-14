@@ -5,7 +5,7 @@
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://exam.sanand.workers.dev"
+          "value": "https://exam.sanand.workers.dev"  // Replace "*" with "https://exam.sanand.workers.dev" in production
         },
         {
           "key": "Access-Control-Allow-Methods",
@@ -18,5 +18,4 @@
       ]
     }
   ]
-  
 }

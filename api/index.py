@@ -4,7 +4,10 @@ import json
 import os
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "https://exam.sanand.workers.dev"}})
+
+# Enable CORS for the specific origin
+CORS(app, resources={r"/api/*": {"origins": "https://exam.sanand.workers.dev"}}, supports_credentials=True)
+
 # Load data from JSON file in the `public/` directory
 def load_data():
     json_file_path = os.path.join(os.path.dirname(__file__), '../public/q-vercel-python.json')
@@ -26,4 +29,3 @@ def get_marks():
 
 if __name__ == '__main__':
     app.run(debug=True)
-

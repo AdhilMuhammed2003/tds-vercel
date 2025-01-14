@@ -13,7 +13,7 @@ def load_data():
     json_file_path = os.path.join(os.path.dirname(__file__), '../public/q-vercel-python.json')
     with open(json_file_path, "r") as f:
         return json.load(f)
-
+@app.route('/',methods=['GET'])
 @app.route('/api', methods=['GET', 'OPTIONS'])
 def get_marks():
     # Load data from JSON

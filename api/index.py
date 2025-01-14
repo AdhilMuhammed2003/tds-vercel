@@ -4,7 +4,7 @@ import json
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "https://exam.sanand.workers.dev"}})
 # Load data from JSON file in the `public/` directory
 def load_data():
     json_file_path = os.path.join(os.path.dirname(__file__), '../public/q-vercel-python.json')
